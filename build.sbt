@@ -6,10 +6,10 @@ lazy val root = Project("hotpotato", file("."))
     commonSettings,
   )
 
-val zioDep             = "dev.zio" %% "zio" % "1.0.0-RC17"
-val zioCatsInteroptDep = "dev.zio" %% "zio-interop-cats" % "2.0.0.0-RC10"
-val catsEffectDep      = "org.typelevel" %% "cats-effect" % "2.0.0"
-val catsCoreDep        = "org.typelevel" %% "cats-core" % "2.0.0"
+val zioDep             = "dev.zio" %% "zio" % "1.0.0-RC20"
+val zioCatsInteroptDep = "dev.zio" %% "zio-interop-cats" % "2.0.0.0-RC14"
+val catsEffectDep      = "org.typelevel" %% "cats-effect" % "2.1.3"
+val catsCoreDep        = "org.typelevel" %% "cats-core" % "2.1.1"
 lazy val core = moduleProject("core")
   .enablePlugins(BoilerplatePlugin)
   .settings(
@@ -19,7 +19,7 @@ lazy val core = moduleProject("core")
       catsEffectDep % "optional",
       zioDep % "optional",
       zioCatsInteroptDep % "optional",
-      "org.typelevel" %% "cats-laws" % "2.0.0" % Test,
+      "org.typelevel" %% "cats-laws" % "2.1.1" % Test,
       "org.typelevel" %% "discipline-scalatest" % "1.0.0-RC2" % Test,
     ),
   )
@@ -91,7 +91,7 @@ def moduleProject(name: String) =
     )
     .settings(
       libraryDependencies ++= Seq(
-        "org.scalatest" %% "scalatest" % "3.1.0" % "test",
+        "org.scalatest" %% "scalatest" % "3.1.2" % "test",
       ),
     )
 

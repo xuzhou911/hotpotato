@@ -3,8 +3,7 @@ import shapeless._
 import shapeless.syntax.inject._
 import shapeless.ops.coproduct.Inject
 import Examples._
-import zio.internal.{Platform, PlatformLive}
-import zio.{DefaultRuntime, Exit}
+import zio.Exit
 
 object Examples {
 
@@ -30,6 +29,9 @@ object Examples {
   final case class E7() extends AllErrors
 
   final case class E8() extends AllErrors
+
+  final case class X1(e: AllErrors)
+  final case class X2(e: AllErrors)
 
   type E123        = E1 :+: E2 :+: E3 :+: CNil
   type E3_E4_E1    = E3 :+: E4 :+: E1 :+: CNil
@@ -94,10 +96,8 @@ object PureExamples {
 
 object ZioExamples {
   import zio.IO
-  val zioRuntime: DefaultRuntime = new DefaultRuntime {
-    override val platform
-      : Platform = PlatformLive.Default.withReportFailure(_ => ()) // Don't report any error to console
-  }
+  import zio.Runtime
+  val zioRuntime = Runtime.default.withReportFailure(_ => ())
 
   def unsafeRun[E, A](z: IO[E, A]): Exit[E, A] = zioRuntime.unsafeRunSync(z)
 
